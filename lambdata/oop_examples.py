@@ -53,13 +53,15 @@ class Animal:
 class Anteater(Animal):
     """ A sub class of anima;, a storage object for the Anteater Class"""
 
-    def __init__(self, name, weight, diet_type='Ants', nose_length):
+    def __init__(self, name, weight, nose_length, diet_type='Ants'):
+        # Note that the order is different in this Sub Class
         super().__init__(name, weight)
         self.diet_type = diet_type
-        self.nose_length = nose_length
+        self.nose_length = float(nose_length)
 
     def whose_arthur(self):
-        return "Yeah, I know that dude Arthur the Aardvark!\n He got his own TV show didn't he?"
+        return "Yeah, I know that dude Arthur the Aardvark!\n" \
+               "He got his own TV show didn't he?"
 
     def run(self):
         return 'Skitter Patter!'
@@ -77,7 +79,7 @@ class Tiger(Animal):
 
     def run(self):
         # Overriding run to be different for tigers
-        return 'Scamper-wooooosh!'
+        return 'Scamper-woosh!'
 
 
 if __name__ == '__main__':
