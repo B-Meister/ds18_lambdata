@@ -1,4 +1,4 @@
-FAV_COLORS = ['maroon', 'black', 'sky-blue']
+FAV_COLORS = ['maroon', 'black', 'cerulean', 'yellow', 'navy']
 
 
 def report_missing_values(df, threshold=0.1):
@@ -21,6 +21,16 @@ def report_missing_values(df, threshold=0.1):
     print(nan_cols)
 
 
+def how_much_to_clean(df):
+    """
+    Looks at a dataframe and tells you what needs to be cleaned
+    :param df: Takes data
+    :return:
+    """
+    null_values = df.isnull().sum()
+    return null_values
+
+
 def split(df):
     """
     Splits the given dataframe into a 8/2 split for training and testing
@@ -30,4 +40,4 @@ def split(df):
     training, test = train_test_split(df, test_size=0.2, random_state=42)
     train, val = train_test_split(training, test_size=0.2, random_state=42)
 
-    return train.shape, valshape, test.shape
+    return train.shape, val.shape, test.shape
