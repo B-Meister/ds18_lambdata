@@ -35,14 +35,46 @@ class ExampleUnitTests(unittest.TestCase):
 
 class SocialMediaUserTests(unittest.TestCase):
     """Tests the instantiation and use of SocialMediaUser"""
-    user1 = SocialMediaUser('Jane')
-    self.assertEqual(user1.upvotes, 0)
+    # user1 = SocialMediaUser('Jane')
+    # self.assertEqual(user1.upvotes, 0)
+
+    def setUp(self):
+        """Common set up code run before all tests."""
+        self.user1 = SocialMediaUser('Jane', 'Denmark')
+        self.user2 = SocialMediaUser('Joe', 'Russia')
+
+    def test_name(self):
+        self.assertEqual(self.user1.name, 'Jane')
+        self.assertEqual(self.user2.name, 'Joe')
+
+    def test_location(self):
+        self.assertEqual(self.user1.location, 'Denmark')
+        self.assertEqual(self.user2.location, 'Russia')
+
+    def test_default_upvotes(self):
+        new_user = SocialMediaUser('Mary', 'Spain')
+        self.assertEqual(new_user.upvotes, 0)
 
     def test_unpopular(self):
-        """Test that a user with <=100 upvotes is not popular."""
-        user1 = SocialMediaUser('Joe')
+        """Test that a user with <= 100 upvotes is not popular."""
+        new_user = SocialMediaUser('Bryce', 'US')
+        self.assertFalse(new_user.is_popular())
         for _ in range(randint(1, 100)):
-            user1.receive_upvote()
+            new_user.receive_upvote()
+        self.assertFalse(new_user.is_popular())
+
+        # def test_unpopular(self):
+        #     """Test that a user with <=100 upvotes is not popular."""
+        #     user1 = SocialMediaUser('Joe')
+        #     for _ in range(randint(1, 100)):
+        #         user1.receive_upvote()
+
+    def test_popular(self):
+        """Test that a user with >100 upvotes is popular."""
+        new_user = SocialMediaUser('Jordan', 'US')
+        for _ in range(randint(101, 10000)):
+            new_user.receive_upvote()
+        self.assertTrue(new_user.is_popular())
 
 
 if __name__ == '__main__':
